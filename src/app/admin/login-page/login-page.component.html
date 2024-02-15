@@ -5,6 +5,10 @@
     {{ error }}
   </div>
 
+  <div class="alert alert-info" *ngIf="messageAlert">
+    {{ messageAlert }}
+  </div>
+
   <div
     class="form-control"
     [ngClass]="{
@@ -12,7 +16,12 @@
     }"
   >
     <label for="email">Email:</label>
-    <input id="email" type="email" formControlName="email" />
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      autocomplete="email"
+    />
     <div
       *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
       class="validation"
