@@ -1,11 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { IFbAuthResponse, IUser } from 'src/app/shared/interfaces';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthService {
+  public error$: Subject<string> = new Subject<string>();
+
   constructor(private http: HttpClient) {}
 
   get token(): string {
@@ -32,7 +34,8 @@ export class AuthService {
       .pipe(
         tap((res: any) => {
           this.setToken(res);
-        })
+        }),
+        catchError(this.handleErorr.bind(this))
       );
   }
 
@@ -42,6 +45,19 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.token;
+  }
+
+  private handleErorr(error: HttpErrorResponse) {
+    const { message } = error.error.error;
+
+    const errorMessage =
+      message === 'INVALID_LOGIN_CREDENTIALS'
+        ? 'Неверный email или пароль'
+        : 'Ошибка ввода данных';
+
+    this.error$.next(errorMessage);
+
+    return throwError(() => error);
   }
 
   private setToken(res: IFbAuthResponse | null) {

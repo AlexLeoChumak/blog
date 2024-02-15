@@ -14,7 +14,7 @@ export class LoginPageComponent implements OnInit {
   minLengthPassword: number = 6;
   submitted = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {} //private
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -30,6 +30,7 @@ export class LoginPageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+
     this.submitted = true;
     const { email, password } = this.form.value;
     const user: IUser = {
@@ -37,10 +38,15 @@ export class LoginPageComponent implements OnInit {
       password,
     };
 
-    this.authService.login(user).subscribe(() => {
-      this.form.reset();
-      this.router.navigate(['/admin', 'dashboard']);
-      this.submitted = false;
+    this.authService.login(user).subscribe({
+      next: () => {
+        this.form.reset();
+        this.router.navigate(['/admin', 'dashboard']);
+        this.submitted = false;
+      },
+      error: () => {
+        this.submitted = false;
+      },
     });
   }
 }
