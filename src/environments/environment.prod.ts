@@ -1,6 +1,7 @@
-import { Environment } from './interface';
+import { IEnvironment } from './interface';
 
-export const environment: Environment = {
+export const environment: IEnvironment = {
   production: true,
   apiKey: 'AIzaSyCcD6aooNPIbeLxO3cBUjgtE-NUvIuNrTE',
+  fbDbUrl: 'https://blog-d901f-default-rtdb.europe-west1.firebasedatabase.app',
 };

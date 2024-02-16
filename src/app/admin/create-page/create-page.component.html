@@ -12,9 +12,7 @@
 
     <div
       class="validation"
-      *ngIf="{
-        invalid: form.get('title')?.touched && form.get('title')?.invalid
-      }"
+      *ngIf="form.get('title')?.touched && form.get('title')?.invalid"
     >
       <small *ngIf="form.get('title')?.errors?.['required']"
         >Введите название</small
@@ -22,9 +20,23 @@
     </div>
   </div>
 
-  <div class="form-control">
-    <label>Контент поста</label>
-    <quill-editor formControlName="text"></quill-editor>
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('text')?.touched && form.get('text')?.invalid
+    }"
+  >
+    <label for="text">Текст поста:</label>
+    <input id="text" type="text" formControlName="text" />
+
+    <div
+      class="validation"
+      *ngIf="form.get('text')?.touched && form.get('text')?.invalid"
+    >
+      <small *ngIf="form.get('text')?.errors?.['required']"
+        >Введите текст поста</small
+      >
+    </div>
   </div>
 
   <div
@@ -38,9 +50,7 @@
 
     <div
       class="validation"
-      *ngIf="{
-        invalid: form.get('author')?.touched && form.get('author')?.invalid
-      }"
+      *ngIf="form.get('author')?.touched && form.get('author')?.invalid"
     >
       <small *ngIf="form.get('author')?.errors?.['required']"
         >Введите имя автора</small
