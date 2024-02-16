@@ -41,7 +41,6 @@ export class CreatePageComponent implements OnInit {
 
     this.postsService.create(post).subscribe((res) => {
       this.form.reset();
-      console.log('res777', res);
     });
   }
 }

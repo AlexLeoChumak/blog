@@ -13,18 +13,20 @@ export class LoginPageComponent implements OnInit {
   form!: FormGroup;
   minLengthPassword: number = 6;
   submitted: boolean = false;
-  messageAlert: string = '';
+  messageAlert: string | null = null;
 
   constructor(
     public authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
-  ) {} //private
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['loginAgain']) {
         this.messageAlert = 'Пожалуйста, войдите под своей учётной записью';
+      } else if (params['authFailed']) {
+        this.messageAlert = 'Сессия истекла. Введите данные заново';
       }
     });
 
@@ -38,6 +40,8 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit() {
+    this.messageAlert = null;
+
     if (this.form.invalid) {
       return;
     }

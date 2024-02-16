@@ -4,7 +4,7 @@ import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { IFbAuthResponse, IUser } from 'src/app/shared/interfaces';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   public error$: Subject<string> = new Subject<string>();
 
