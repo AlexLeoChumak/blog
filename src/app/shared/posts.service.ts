@@ -51,6 +51,13 @@ export class PostsService {
     );
   }
 
+  update(post: IPost): Observable<IPost> {
+    return this.http.patch<IPost>(
+      `${environment.fbDbUrl}/posts/${post.id}.json`,
+      post
+    );
+  }
+
   remove(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.fbDbUrl}/posts/${id}.json`);
   }
