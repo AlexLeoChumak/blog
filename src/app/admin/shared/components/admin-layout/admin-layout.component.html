@@ -3,6 +3,7 @@
 <nav class="navbar bg-primary">
   <h1>
     <a routerLink="/">Admin</a>
+    <button class="btn btn-dark" [routerLink]="['/']">Go Home Page</button>
   </h1>
 
   <ul *ngIf="authService.isAuthenticated()">
