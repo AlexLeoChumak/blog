@@ -26,7 +26,7 @@ export class LoginPageComponent implements OnInit {
       if (params['loginAgain']) {
         this.messageAlert = 'Пожалуйста, войдите под своей учётной записью';
       } else if (params['authFailed']) {
-        this.messageAlert = 'Сессия истекла. Введите данные заново';
+        this.messageAlert = 'Сессия истекла. Введите данные заново!';
       }
     });
 
