@@ -24,7 +24,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['loginAgain']) {
-        this.messageAlert = 'Пожалуйста, войдите под своей учётной записью';
+        this.messageAlert = 'Пожалуйста, войдите под своей учётной записью!';
       } else if (params['authFailed']) {
         this.messageAlert = 'Сессия истекла. Введите данные заново!';
       }
