@@ -1,0 +1,27 @@
+.truncate {
+  max-width: 550px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 0 15px 0;
+}
+
+small {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.btn-dark {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 670px) {
+  .card {
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .truncate {
+    margin: 0 auto 15px;
+  }
+}

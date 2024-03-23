@@ -22,6 +22,12 @@ body {
   color: #333;
 }
 
+@media screen and (max-width: 890px) {
+  body {
+    font-size: 1.3rem;
+  }
+}
+
 a {
   color: var(--primary-color);
   cursor: pointer;
@@ -265,7 +271,6 @@ table th {
   padding: 0.7rem 2rem;
   z-index: 1;
   width: 100%;
-  opacity: 0.9;
   margin-bottom: 1rem;
 
   &.main {

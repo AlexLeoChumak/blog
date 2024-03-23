@@ -1,23 +1,28 @@
 <app-alert></app-alert>
+<div class="bg-primary">
+  <nav class="navbar container">
+    <div>
+      <h1>
+        <a routerLink="/">Admin</a>
+      </h1>
+      <button class="btn btn-dark text-left" [routerLink]="['/']">
+        Go Home Page
+      </button>
+    </div>
 
-<nav class="navbar bg-primary">
-  <h1>
-    <a routerLink="/">Admin</a>
-    <button class="btn btn-dark" [routerLink]="['/']">Go Home Page</button>
-  </h1>
-
-  <ul *ngIf="authService.isAuthenticated()">
-    <li routerLinkActive="active">
-      <a [routerLink]="['/admin', 'dashboard']">Главная</a>
-    </li>
-    <li routerLinkActive="active">
-      <a [routerLink]="['/admin', 'create']">Создать</a>
-    </li>
-    <li>
-      <a href="#" (click)="logout($event)">Выйти</a>
-    </li>
-  </ul>
-</nav>
+    <ul *ngIf="authService.isAuthenticated()">
+      <li routerLinkActive="active">
+        <a [routerLink]="['/admin', 'dashboard']">Главная</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/admin', 'create']">Создать</a>
+      </li>
+      <li>
+        <a href="#" (click)="logout($event)">Выйти</a>
+      </li>
+    </ul>
+  </nav>
+</div>
 
 <div class="container">
   <router-outlet></router-outlet>

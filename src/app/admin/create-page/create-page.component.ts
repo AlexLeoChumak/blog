@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IPost } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/posts.service';
 import { AlertService } from '../shared/services/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-page',
@@ -14,7 +15,8 @@ export class CreatePageComponent implements OnInit {
 
   constructor(
     private postsService: PostsService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -35,17 +37,10 @@ export class CreatePageComponent implements OnInit {
       date: new Date(),
     };
 
-    // const { title, text, author } = this.form.value;
-    // const post: IPost = {
-    //   text,
-    //   title,
-    //   author,
-    //   date: new Date(),
-    // };
-
-    this.postsService.create(post).subscribe((res) => {
+    this.postsService.create(post).subscribe(() => {
       this.form.reset();
       this.alertService.success('Пост создан успешно');
+      this.router.navigate(['admin', 'dashboard']);
     });
   }
 }

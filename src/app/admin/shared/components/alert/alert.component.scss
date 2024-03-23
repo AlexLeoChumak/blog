@@ -1,6 +1,7 @@
 .alert-wrap {
   position: fixed;
-  top: 50px;
-  right: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   max-width: 200px;
 }

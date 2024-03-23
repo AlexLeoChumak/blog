@@ -1,3 +1,81 @@
 .open {
   margin-right: 10px;
 }
+
+table td:first-of-type {
+  max-width: 50px;
+}
+
+table td:nth-of-type(4) {
+  max-width: 165px;
+}
+
+table td:last-of-type {
+  max-width: 120px;
+}
+
+table tr {
+  border-bottom: rgb(225, 225, 225) 1px solid;
+}
+
+.truncate {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 890px) {
+  .open {
+    margin-right: 20px;
+    font-size: 1.3rem;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table tr {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 10px;
+  }
+
+  table td {
+    font-weight: bold;
+    padding: 10px 0;
+  }
+
+  table td:first-of-type {
+    background: rgb(201, 201, 201);
+    max-width: none;
+    width: 30px;
+    text-align: center;
+  }
+
+  table td:nth-of-type(4) {
+    max-width: none;
+  }
+
+  table td:last-of-type {
+    max-width: none;
+  }
+
+  .truncate {
+    max-width: 500px;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .truncate {
+    max-width: 300px;
+    white-space: normal;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .truncate {
+    max-width: 250px;
+  }
+}

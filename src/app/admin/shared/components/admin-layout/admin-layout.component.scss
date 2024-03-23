@@ -1,0 +1,35 @@
+.navbar > div {
+  display: flex;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 890px) {
+  .navbar > div {
+    display: block;
+  }
+  .container {
+    padding: 0 20px;
+  }
+  .btn-dark {
+    margin: 0 0 15px 0;
+  }
+}
+
+@media screen and (max-width: 615px) {
+  .navbar {
+    flex-direction: column;
+    h1 {
+      text-align: center;
+    }
+    ul {
+      margin: 20px 0 10px;
+    }
+    button {
+      margin: 20px 0 10px;
+    }
+  }
+}
