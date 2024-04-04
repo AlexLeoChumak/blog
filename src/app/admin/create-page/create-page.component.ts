@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IPost } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/posts.service';
 import { AlertService } from '../shared/services/alert.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
   styleUrls: ['./create-page.component.scss'],
 })
-export class CreatePageComponent implements OnInit {
+export class CreatePageComponent implements OnInit, OnDestroy {
+  private createSub!: Subscription;
   form!: FormGroup;
 
   constructor(
@@ -37,10 +39,14 @@ export class CreatePageComponent implements OnInit {
       date: new Date(),
     };
 
-    this.postsService.create(post).subscribe(() => {
+    this.createSub = this.postsService.create(post).subscribe(() => {
       this.form.reset();
       this.alertService.success('Пост создан успешно');
       this.router.navigate(['admin', 'dashboard']);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.createSub ? this.createSub.unsubscribe() : null;
   }
 }

@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUser } from 'src/app/shared/interfaces';
 import { AuthService } from '../shared/services/auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
+  private queryParamsSub!: Subscription;
+  private loginSub!: Subscription;
   form!: FormGroup;
   minLengthPassword: number = 6;
   submitted: boolean = false;
@@ -22,7 +25,7 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params: Params) => {
+    this.queryParamsSub = this.route.queryParams.subscribe((params: Params) => {
       if (params['loginAgain']) {
         this.messageAlert = 'Пожалуйста, войдите под своей учётной записью!';
       } else if (params['authFailed']) {
@@ -53,7 +56,7 @@ export class LoginPageComponent implements OnInit {
       password,
     };
 
-    this.authService.login(user).subscribe({
+    this.loginSub = this.authService.login(user).subscribe({
       next: () => {
         this.form.reset();
         this.router.navigate(['/admin', 'dashboard']);
@@ -63,5 +66,10 @@ export class LoginPageComponent implements OnInit {
         this.submitted = false;
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this.queryParamsSub ? this.queryParamsSub.unsubscribe() : null;
+    this.loginSub ? this.loginSub.unsubscribe() : null;
   }
 }

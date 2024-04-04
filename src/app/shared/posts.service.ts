@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IFbCreateResponse, IPost } from './interfaces';
 import { Observable, catchError, map, of } from 'rxjs';
+import { IFbCreateResponse, IPost } from './interfaces';
 import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })

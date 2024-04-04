@@ -47,6 +47,16 @@ export class AuthService {
     return !!this.token;
   }
 
+  private setToken(res: IFbAuthResponse | null) {
+    if (res) {
+      const expDate = new Date(new Date().getTime() + +res.expiresIn * 1000);
+      localStorage.setItem('fb-token', res.idToken);
+      localStorage.setItem('fb-token-exp', expDate.toString());
+    } else {
+      localStorage.clear();
+    }
+  }
+
   private handleErorr(error: HttpErrorResponse) {
     const { message } = error.error.error;
 
@@ -58,15 +68,5 @@ export class AuthService {
     this.error$.next(errorMessage);
 
     return throwError(() => error);
-  }
-
-  private setToken(res: IFbAuthResponse | null) {
-    if (res) {
-      const expDate = new Date(new Date().getTime() + +res.expiresIn * 1000);
-      localStorage.setItem('fb-token', res.idToken);
-      localStorage.setItem('fb-token-exp', expDate.toString());
-    } else {
-      localStorage.clear();
-    }
   }
 }

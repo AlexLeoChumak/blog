@@ -41,12 +41,6 @@ export class EditPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    if (this.uSub) {
-      this.uSub.unsubscribe();
-    }
-  }
-
   submit() {
     if (this.form.invalid) {
       return;
@@ -64,5 +58,11 @@ export class EditPageComponent implements OnInit, OnDestroy {
         this.alertService.warning('Пост изменён');
         this.router.navigate(['admin', 'dashboard']);
       });
+  }
+
+  ngOnDestroy() {
+    if (this.uSub) {
+      this.uSub.unsubscribe();
+    }
   }
 }
